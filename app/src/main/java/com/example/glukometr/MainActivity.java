@@ -1,6 +1,5 @@
 package com.example.glukometr;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     Handler handler;
     int prevDegrees=90;
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         arrow.startAnimation(rotateAnimation);
     }
     public void RecentOnClick(View view){
-        Intent intent = new Intent(this,RecentList.class);
+        Intent intent = new Intent(this, RecentListActivity.class);
         startActivity(intent);
     }
     public void generateRandomMeasuring(){
@@ -79,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     if (lastMeasures.size() == 20) {
                         String wavingValue = CheckResults.defineWaving(lastMeasures);
                         String averageValue = CheckResults.defineAverage(lastMeasures);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault());
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", new Locale("ru"));
                         String date = simpleDateFormat.format(new Date());
-                        RecentList.measurings.add(new Measuring(date, wavingValue, averageValue));
+                        RecentListActivity.measurings.add(new Measuring(date, wavingValue, averageValue));
                         lastMeasures.clear();
                     }
                     handler.sendEmptyMessage(newDegrees);

@@ -61,8 +61,7 @@
             android:layout_toEndOf="@id/separator1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/description_home_page"
-            android:src="@drawable/settings"
-            android:onClick="RecentOnClick"/>
+            android:src="@drawable/settings" />
 
 
     </RelativeLayout>

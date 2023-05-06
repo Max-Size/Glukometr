@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import java.util.ArrayList;
 
-public class RecentList extends AppCompatActivity {
+public class RecentListActivity extends AppCompatActivity {
     public static ArrayList<Measuring> measurings = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,10 @@ public class RecentList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(measuringAdapter);
         //notifying(measuringAdapter);
+    }
+    public void onClickHome(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
     public void notifying(MeasuringAdapter measuringAdapter){
         Handler handler = new Handler();
