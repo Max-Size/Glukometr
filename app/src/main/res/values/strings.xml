@@ -9,6 +9,6 @@
     <string name="level_of_waving">Уровень колебаний:</string>
     <string name="high">Высокий</string>
     <string name="average_value">Среднее значение:</string>
-    <string name="higher_the_ok">Выше нормы</string>
+    <string name="higher_the_ok">Сильно ниже нормы</string>
     <string name="current_date">24 Апреля 2023 09.23</string>
 </resources>
