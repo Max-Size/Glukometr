@@ -51,7 +51,9 @@
                 android:id="@+id/average_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:textSize="15sp"
                 android:textAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
                 android:text="@string/higher_the_ok"/>
