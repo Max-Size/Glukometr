@@ -1,4 +1,5 @@
-package com.example.glukometr;
+package com.example.glukometr.ui_layer;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+
+import com.example.glukometr.data_layer.Client;
+import com.example.glukometr.data_layer.Measuring;
+import com.example.glukometr.R;
+import com.example.glukometr.data_layer.CheckResults;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         generateRandomMeasuring();
-        Client.connectToServer();
+        Client client = new Client();
+        client.connectToServer();
     }
     public void onClickRotate(View view){
         ImageView arrow = findViewById(R.id.arrow);
@@ -61,13 +68,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RecentListActivity.class);
         startActivity(intent);
     }
+    public void onClickSettings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
     public void generateRandomMeasuring(){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    changeCurrentResult();
-                    int newDegrees = fromNumberToDegree(currentResult);
+                    currentResult = CheckResults.changeCurrentResult(currentResult);
+                    int newDegrees = CheckResults.fromNumberToDegree(currentResult);
                     if (newDegrees > 180) {
                         newDegrees = 180;
                     }
@@ -93,26 +104,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         thread.start();
-    }
-    private int fromNumberToDegree(double number){
-        if(number>= 3 && number<=6){
-            return 72+ (int) ((number-3D)/(3D/36D));
-        }else if(number >=0 && number<3) {
-            return (int) (number/(3D/72D));
-        }else if(number>6 && number<=11){
-            return 108+ (int) ((number-6D)/(5D/72D));
-        }
-        return 180;
-    }
-    private void changeCurrentResult(){
-        double change = rnd(-5,5);
-        change/=10;
-        if(currentResult+change<0){
-            currentResult=0.5;
-        }else if(currentResult+change>11){
-            currentResult=10.5;
-        }else {
-            currentResult += change;
-        }
     }
 }

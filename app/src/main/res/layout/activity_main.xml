@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".MainActivity">
+    tools:context=".ui_layer.MainActivity">
     <RelativeLayout
         android:id="@+id/tool_bar"
         android:orientation="horizontal"
@@ -61,7 +61,8 @@
             android:layout_toEndOf="@id/separator1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/description_home_page"
-            android:src="@drawable/settings" />
+            android:src="@drawable/settings"
+            android:onClick="onClickSettings"/>
 
 
     </RelativeLayout>

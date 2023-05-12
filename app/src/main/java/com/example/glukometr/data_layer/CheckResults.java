@@ -1,9 +1,14 @@
-package com.example.glukometr;
+package com.example.glukometr.data_layer;
 
 import java.util.Collections;
 import java.util.List;
 
 public class CheckResults {
+    private static int rnd(int min, int max)
+    {
+        max -= min;
+        return (int) (Math.random() * ++max) + min;
+    }
     public static String defineWaving(List<Double> measurements){
         double max = Collections.max(measurements);
         double min = Collections.min(measurements);
@@ -29,5 +34,27 @@ public class CheckResults {
         }else{
             return "Сильно выше нормы";
         }
+    }
+    public static int fromNumberToDegree(double number){
+        if(number>= 3 && number<=6){
+            return 72+ (int) ((number-3D)/(3D/36D));
+        }else if(number >=0 && number<3) {
+            return (int) (number/(3D/72D));
+        }else if(number>6 && number<=11){
+            return 108+ (int) ((number-6D)/(5D/72D));
+        }
+        return 180;
+    }
+    public static double changeCurrentResult(double currentResult){
+        double change = rnd(-5,5);
+        change/=10;
+        if(currentResult+change<0){
+            currentResult=0.5;
+        }else if(currentResult+change>11){
+            currentResult=10.5;
+        }else {
+            currentResult += change;
+        }
+        return currentResult;
     }
 }

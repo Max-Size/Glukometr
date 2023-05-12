@@ -1,4 +1,4 @@
-package com.example.glukometr;
+package com.example.glukometr.data_layer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.glukometr.R;
+
 import java.util.List;
 
 public class MeasuringAdapter extends RecyclerView.Adapter<MeasuringAdapter.ViewHolder> {
     private final LayoutInflater inflater;
     private final List<Measuring> measurings;
-    MeasuringAdapter(Context context,List<Measuring> measurings){
+    public MeasuringAdapter(Context context,List<Measuring> measurings){
         this.measurings = measurings;
         this.inflater = LayoutInflater.from(context);
     }

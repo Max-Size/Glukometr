@@ -1,4 +1,4 @@
-package com.example.glukometr;
+package com.example.glukometr.data_layer;
 
 public class Measuring {
     private String fullDate;

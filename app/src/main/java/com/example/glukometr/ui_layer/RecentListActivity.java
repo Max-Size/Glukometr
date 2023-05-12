@@ -1,4 +1,4 @@
-package com.example.glukometr;
+package com.example.glukometr.ui_layer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
+
+import com.example.glukometr.R;
+import com.example.glukometr.data_layer.Measuring;
+import com.example.glukometr.data_layer.MeasuringAdapter;
 
 import java.util.ArrayList;
 
@@ -30,5 +33,8 @@ public class RecentListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
+    public void onClickSettings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }
