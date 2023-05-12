@@ -14,6 +14,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.example.glukometr.data_layer.Client;
+import com.example.glukometr.data_layer.ListItemCreate;
 import com.example.glukometr.data_layer.Measuring;
 import com.example.glukometr.R;
 import com.example.glukometr.data_layer.CheckResults;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    public Client client = new Client();
     Handler handler;
     int prevDegrees=90;
     double currentResult= 4.5;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         generateRandomMeasuring();
-        Client client = new Client();
+        ListItemCreate.checkingAdding(lastMeasures,client);
         client.connectToServer();
     }
     public void onClickRotate(View view){
@@ -86,14 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         newDegrees = 0;
                     }
                     lastMeasures.add(currentResult);
-                    if (lastMeasures.size() == 20) {
-                        String wavingValue = CheckResults.defineWaving(lastMeasures);
-                        String averageValue = CheckResults.defineAverage(lastMeasures);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", new Locale("ru"));
-                        String date = simpleDateFormat.format(new Date());
-                        RecentListActivity.measurings.add(new Measuring(date, wavingValue, averageValue));
-                        lastMeasures.clear();
-                    }
                     handler.sendEmptyMessage(newDegrees);
                     try {
                         Thread.sleep(1000);

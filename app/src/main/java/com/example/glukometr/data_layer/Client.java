@@ -27,47 +27,38 @@ public class Client {
         thread.start();
     }
     public void post(List<Double> measurings){
-        Thread thread = new Thread(() -> {
+        try {
             try {
-                try {
-                    out = new ObjectOutputStream(socket.getOutputStream());
-                    out.writeInt(measurings.size());
+                out = new ObjectOutputStream(socket.getOutputStream());
+                out.writeInt(measurings.size());
+                out.flush();
+                for (double curMeasuring : measurings) {
+                    out.writeDouble(curMeasuring);
                     out.flush();
-                    for (double curMeasuring : measurings) {
-                        out.writeDouble(curMeasuring);
-                        out.flush();
-                    }
-                } catch (IOException e) {
-                    return;
-                } finally {
-                    out.close();
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 return;
+            } finally {
+                out.close();
             }
-        });
-        thread.start();
+        }catch (IOException e){
+            return;
+        }
     }
     public String getPath() {
-        final String[] path = new String[1];
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    try {
-                        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        path[0] = in.readLine();
-                    } catch (IOException e) {
-                        path[0] = "error";
-                    } finally {
-                        in.close();
-                    }
-                } catch (IOException e) {
-                    path[0] = "error";
-                }
+        String path;
+        try {
+            try {
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                path = in.readLine();
+            } catch (IOException e) {
+                path = "error";
+            } finally {
+                in.close();
             }
-        });
-        thread.start();
-        return path[0];
+        } catch (IOException e) {
+            path = "error";
+        }
+        return path;
     }
 }
