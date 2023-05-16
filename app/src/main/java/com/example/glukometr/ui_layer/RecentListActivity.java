@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -35,6 +36,11 @@ public class RecentListActivity extends AppCompatActivity {
     }
     public void onClickSettings(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openDetails(Uri uri){
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
         startActivity(intent);
     }
 }

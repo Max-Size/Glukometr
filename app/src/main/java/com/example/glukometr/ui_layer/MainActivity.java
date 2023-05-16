@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         };
         generateRandomMeasuring();
         ListItemCreate.checkingAdding(lastMeasures,client);
-        client.connectToServer();
     }
     public void onClickRotate(View view){
         ImageView arrow = findViewById(R.id.arrow);

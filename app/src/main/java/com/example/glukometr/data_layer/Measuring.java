@@ -5,12 +5,28 @@ public class Measuring {
     private String waving;
     private String averageValue;
 
+    private String chartURi;
+
     public Measuring(String fullDate,String waving,String averageValue){
         this.fullDate = fullDate;
         this.waving = waving;
         this.averageValue = averageValue;
     }
 
+    public Measuring(String fullDate,String waving,String averageValue,String chartURi){
+        this.fullDate = fullDate;
+        this.waving = waving;
+        this.averageValue = averageValue;
+        this.chartURi= chartURi;
+    }
+
+    public String getChartURi() {
+        return chartURi;
+    }
+
+    public void setChartURi(String chartURi) {
+        this.chartURi = chartURi;
+    }
     public String getFullDate() {
         return fullDate;
     }

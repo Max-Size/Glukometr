@@ -6,42 +6,36 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Client {
     Socket socket;
     private BufferedReader in;
-    private ObjectOutputStream out;
-    public void connectToServer(){
-        Thread thread = new Thread(() -> {
-            try {
-                socket = new Socket("192.168.56.1", 7056);
-            }catch (Exception e){
-                Log.i("Error","Socket error");
-            }
-        });
-        thread.start();
+    private BufferedWriter out;
+    public boolean connectToServer(){
+        try {
+            socket = new Socket("192.168.5.105", 7056);
+            return true;
+        }catch (Exception e){
+            Log.d("Error","error connect to server");
+            return false;
+        }
     }
     public void post(List<Double> measurings){
         try {
-            try {
-                out = new ObjectOutputStream(socket.getOutputStream());
-                out.writeInt(measurings.size());
+            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            int size = measurings.size();
+            out.write(String.valueOf(size));
+            out.flush();
+            for (double curMeasuring : measurings) {
+                out.write(new DecimalFormat("#0.0").format(curMeasuring));
                 out.flush();
-                for (double curMeasuring : measurings) {
-                    out.writeDouble(curMeasuring);
-                    out.flush();
-                }
-            } catch (IOException e) {
-                return;
-            } finally {
-                out.close();
             }
-        }catch (IOException e){
+
+        } catch (IOException e) {
             return;
         }
     }
@@ -52,12 +46,12 @@ public class Client {
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 path = in.readLine();
             } catch (IOException e) {
-                path = "error";
+                path = "error while getting path";
             } finally {
                 in.close();
             }
         } catch (IOException e) {
-            path = "error";
+            path = "error while getting path";
         }
         return path;
     }

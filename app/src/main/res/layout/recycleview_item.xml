@@ -2,16 +2,29 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="140dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-        android:id="@+id/current_date"
-        android:layout_margin="10dp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textAppearance="@style/ShapeAppearance.Material3.Corner.Large"
-        android:text="@string/current_date"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/current_date"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textAppearance="@style/ShapeAppearance.Material3.Corner.Large"
+            android:text="@string/current_date"/>
+
+        <Button
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#72F4FBF6"
+            android:text="@string/description"
+            android:textColor="@color/black" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="390dp"

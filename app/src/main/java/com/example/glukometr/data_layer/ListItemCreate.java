@@ -14,11 +14,15 @@ public class ListItemCreate {
         String averageValue = CheckResults.defineAverage(lastMeasures);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", new Locale("ru"));
         String date = simpleDateFormat.format(new Date());
-        if(client.socket!=null){
+        String URi;
+        if(client.connectToServer()){
             client.post(lastMeasures);
-            String path = client.getPath();
+            URi = client.getPath();
         }
-        RecentListActivity.measurings.add(new Measuring(date, wavingValue, averageValue));
+        else{
+            URi = "https://disk.yandex.ru/d/sKmNcjXvoNgU";
+        }
+        RecentListActivity.measurings.add(new Measuring(date, wavingValue, averageValue,URi));
         lastMeasures.clear();
     }
     public static void checkingAdding(List<Double> lastMeasures,Client client){
