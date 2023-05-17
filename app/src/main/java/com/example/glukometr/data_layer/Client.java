@@ -31,7 +31,7 @@ public class Client {
             out.write(String.valueOf(size));
             out.flush();
             for (double curMeasuring : measurings) {
-                out.write(new DecimalFormat("#0.0").format(curMeasuring));
+                out.write(new DecimalFormat("#00.0").format(curMeasuring));
                 out.flush();
             }
 
