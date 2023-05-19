@@ -21,6 +21,7 @@ import com.example.glukometr.data_layer.CheckResults;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Handler handler;
     int prevDegrees=90;
     double currentResult= 4.5;
-    private final List<Double> lastMeasures = new ArrayList<>();
+    private final List<Double> lastMeasures = Collections.synchronizedList(new ArrayList<>());
     public static int rnd(int min, int max)
     {
         max -= min;

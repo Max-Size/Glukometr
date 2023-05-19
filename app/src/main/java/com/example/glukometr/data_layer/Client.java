@@ -17,7 +17,7 @@ public class Client {
     private BufferedWriter out;
     public boolean connectToServer(){
         try {
-            socket = new Socket("192.168.5.105", 7056);
+            socket = new Socket("192.168.5.101", 7056);
             return true;
         }catch (Exception e){
             Log.d("Error","error connect to server");
@@ -30,9 +30,11 @@ public class Client {
             int size = measurings.size();
             out.write(String.valueOf(size));
             out.flush();
-            for (double curMeasuring : measurings) {
-                out.write(new DecimalFormat("#00.0").format(curMeasuring));
-                out.flush();
+            synchronized (measurings) {
+                for (double curMeasuring : measurings) {
+                    out.write(new DecimalFormat("#00.0").format(curMeasuring));
+                    out.flush();
+                }
             }
 
         } catch (IOException e) {
